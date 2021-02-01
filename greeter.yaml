@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: greeter-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: greeter-server
+  template:
+    metadata:
+      labels:
+        app: greeter-server
+    spec:
+      containers:
+      - name: greeter-server
+        image: ghcr.io/tkms0106/greeter_server:v1.35.0
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 50051
+        env:
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: greeter-server
+spec:
+  selector:
+    app: greeter-server
+  ports:
+  - port: 50051
+    targetPort: 50051
