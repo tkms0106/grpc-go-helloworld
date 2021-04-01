@@ -1,4 +1,4 @@
-FROM golang:1.15.7 as builder
+FROM golang:1.15.10 as builder
 ARG VERSION
 COPY greeter_server/ /go/src/github.com/mikutas/grpc-go-helloworld/greeter_server/
 RUN cd /go/src/github.com/mikutas/grpc-go-helloworld/greeter_server/ \
