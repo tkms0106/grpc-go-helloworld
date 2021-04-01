@@ -1,0 +1,6 @@
+version: 2
+updates:
+  - package-ecosystem: "gomod"
+    directory: "/greeter_server"
+    schedule:
+      interval: "daily"
